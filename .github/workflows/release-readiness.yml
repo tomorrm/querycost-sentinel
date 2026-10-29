@@ -1,0 +1,123 @@
+name: release-readiness
+
+on:
+  push:
+    paths:
+      - "script/**"
+      - "iac/**"
+      - "README.md"
+      - "ARCHITECTURE.md"
+      - "SECURITY.md"
+      - "SUPPORT.md"
+      - "pyproject.toml"
+      - ".pre-commit-config.yaml"
+      - ".github/workflows/**"
+      - "scripts/validate.sh"
+      - "mise.toml"
+      - ".tflint.hcl"
+  pull_request:
+
+jobs:
+  terraform-validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        stack: [realtime_monitor, monthly_ranking]
+    defaults:
+      run:
+        working-directory: iac/${{ matrix.stack }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: hashicorp/setup-terraform@v4.0.1
+        with:
+          terraform_version: "1.17.0"
+      - name: Terraform fmt
+        run: terraform fmt -check -recursive
+      - name: Terraform init
+        run: terraform init -backend=false -input=false
+      - name: Terraform validate
+        run: terraform validate
+
+  terraform-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: bridgecrewio/checkov-action@v12.3136.0
+        with:
+          directory: iac/
+          framework: terraform
+          quiet: true
+
+  python-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r script/realtime_monitor/requirements-test.txt
+          python -m pip install -r script/monthly_ranking/requirements-test.txt
+          python -m pip install ruff bandit[toml] mypy types-urllib3
+      - name: Python syntax checks
+        run: |
+          python -m py_compile \
+            script/realtime_monitor/src/lambda_function.py \
+            script/realtime_monitor/src/lambda_exceptions.py \
+            script/monthly_ranking/src/lambda_function.py
+      - name: Lint and format with ruff
+        run: |
+          ruff check script/realtime_monitor/src script/realtime_monitor/tests script/monthly_ranking/src script/monthly_ranking/tests
+          ruff format --check script/realtime_monitor/src script/realtime_monitor/tests script/monthly_ranking/src script/monthly_ranking/tests
+      - name: Static type check with mypy
+        run: |
+          PYTHONPATH=script/realtime_monitor/src mypy script/realtime_monitor/src
+          PYTHONPATH=script/monthly_ranking/src mypy script/monthly_ranking/src
+      - name: Security scan with bandit
+        run: |
+          bandit -r script/realtime_monitor/src script/monthly_ranking/src
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Audit runtime dependencies with pip-audit
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pip-audit
+          pip-audit -r script/realtime_monitor/requirements.txt
+          pip-audit -r script/monthly_ranking/requirements.txt
+
+  lambda-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r script/realtime_monitor/requirements-test.txt
+          python -m pip install -r script/monthly_ranking/requirements-test.txt
+      - name: Lambda unit tests with coverage (realtime)
+        run: |
+          PYTHONPATH=script/realtime_monitor/src python -m pytest \
+            --cov=script/realtime_monitor/src \
+            --cov-report=term-missing \
+            script/realtime_monitor/tests
+      - name: Lambda unit tests with coverage (monthly ranking)
+        run: |
+          PYTHONPATH=script/monthly_ranking/src python -m pytest \
+            --cov=script/monthly_ranking/src \
+            --cov-report=term-missing \
+            script/monthly_ranking/tests

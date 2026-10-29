@@ -1,0 +1,61 @@
+name: Bug Report
+description: Report a problem with QueryCost Sentinel.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report an issue. Please provide as much detail as possible.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Provide minimal steps or configuration needed to reproduce the behavior.
+      placeholder: |
+        1. Deploy stack X with variable Y.
+        2. Trigger event Z.
+        3. Observe error.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened? Include logs or error messages if available.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        - Terraform version
+        - Python version
+        - AWS region
+        - Deployment target (realtime_monitor / monthly_ranking)
+      render: markdown
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: I am reporting a single bug per issue.
+          required: true

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-language="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A serverless foundation for monitoring CloudWatch Logs Insights costs and sending Slack alerts." />
+  <meta property="og:title" content="QueryCost Sentinel" />
+  <meta property="og:description" content="Monitor CloudWatch Logs Insights costs and receive Slack alerts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tomorrm.github.io/querycost-sentinel/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <title>QueryCost Sentinel</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav__brand" href="#top">
+        <span class="nav__logo" aria-hidden="true"></span>
+        <span>QueryCost Sentinel</span>
+      </a>
+      <div class="nav__links">
+        <a href="#features"><span class="copy-ja" lang="ja">機能</span><span class="copy-en" lang="en">Features</span></a>
+        <a href="#benefits"><span class="copy-ja" lang="ja">導入効果</span><span class="copy-en" lang="en">Benefits</span></a>
+        <a href="#flow"><span class="copy-ja" lang="ja">仕組み</span><span class="copy-en" lang="en">How it works</span></a>
+        <a href="#start"><span class="copy-ja" lang="ja">導入</span><span class="copy-en" lang="en">Get started</span></a>
+        <a href="https://github.com/tomorrm/querycost-sentinel" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+      <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language to Japanese">
+        <span id="languageToggleLabel">Japanese</span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle__icon" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+        <p class="hero__eyebrow">
+          <span class="copy-ja" lang="ja">サーバーレス運用基盤</span>
+          <span class="copy-en" lang="en">Serverless Operations Foundation</span>
+        </p>
+        <h1 class="hero__title">
+          <span class="copy-ja" lang="ja">クエリコストを<br /><span class="gradient-text">見える化する。</span></span>
+          <span class="copy-en" lang="en">Make <span class="gradient-text">query costs visible.</span></span>
+        </h1>
+        <p class="hero__lead">
+          <span class="copy-ja" lang="ja">CloudWatch Logs Insights の利用状況をリアルタイムで監視し、<br class="hide-mobile" />月次のユーザー別ランキングとコスト異常を Slack へ自動通知。</span>
+          <span class="copy-en" lang="en">Monitor CloudWatch Logs Insights usage in real time, and automatically send monthly per-user rankings and cost anomaly alerts to Slack.</span>
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="https://github.com/tomorrm/querycost-sentinel" target="_blank" rel="noopener noreferrer"><span class="copy-ja" lang="ja">GitHub で見る</span><span class="copy-en" lang="en">View on GitHub</span></a>
+          <a class="button button--secondary" href="#start"><span class="copy-ja" lang="ja">5 分で導入</span><span class="copy-en" lang="en">Get started in 5 minutes</span></a>
+        </div>
+      </div>
+      <div class="hero__visual" aria-hidden="true">
+        <div class="orb orb--1"></div>
+        <div class="orb orb--2"></div>
+        <div class="orb orb--3"></div>
+      </div>
+    </section>
+
+    <section class="section section--features" id="features">
+      <div class="container">
+        <h2 class="section__title"><span class="copy-ja" lang="ja">すべてを、シンプルに。</span><span class="copy-en" lang="en">Operations, made simple.</span></h2>
+        <p class="section__subtitle"><span class="copy-ja" lang="ja">インフラから通知まで、Terraform で一式構築。</span><span class="copy-en" lang="en">Provision the full stack—from infrastructure to notifications—with Terraform.</span></p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3><span class="copy-ja" lang="ja">リアルタイム監視</span><span class="copy-en" lang="en">Real-time monitoring</span></h3>
+            <p><span class="copy-ja" lang="ja">CloudTrail の StartQuery イベントを検知。スキャン量が閾値を超えた瞬間に Slack へ警告。</span><span class="copy-en" lang="en">Detect CloudTrail StartQuery events and alert Slack as soon as scanned data exceeds the configured threshold.</span></p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 9l-5 5-2-2-4 4"/></svg>
+            </div>
+            <h3><span class="copy-ja" lang="ja">月次ランキング</span><span class="copy-en" lang="en">Monthly rankings</span></h3>
+            <p><span class="copy-ja" lang="ja">ユーザー別のスキャン量・推定コストを集計し、トップ N を自動レポート。</span><span class="copy-en" lang="en">Aggregate scanned data and estimated costs by user, then automatically report the top N.</span></p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3><span class="copy-ja" lang="ja">コスト異常検知</span><span class="copy-en" lang="en">Cost anomaly detection</span></h3>
+            <p><span class="copy-ja" lang="ja">直近の履歴と比較して、急激なコスト上昇を σ 基準で検知・ハイライト。</span><span class="copy-en" lang="en">Compare recent history to detect and highlight unusual cost increases using a configurable sigma threshold.</span></p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3><span class="copy-ja" lang="ja">セキュア by Design</span><span class="copy-en" lang="en">Secure by design</span></h3>
+            <p><span class="copy-ja" lang="ja">KMS 暗号化、最小権限 IAM、Secrets Manager 対応。Checkov 166 チェックをクリア。</span><span class="copy-en" lang="en">Includes KMS encryption, least-privilege IAM, and Secrets Manager support; passes 166 Checkov checks.</span></p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3><span class="copy-ja" lang="ja">ダッシュボード</span><span class="copy-en" lang="en">Dashboards</span></h3>
+            <p><span class="copy-ja" lang="ja">CloudWatch Dashboard を自動構築。エラー、スロットル、コストを一目で把握。</span><span class="copy-en" lang="en">Automatically create CloudWatch dashboards to see errors, throttles, and costs at a glance.</span></p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 3"/><path d="M21 3v5.25"/><path d="M21 3h-5.25"/></svg>
+            </div>
+            <h3><span class="copy-ja" lang="ja">信頼性のあるポーリング</span><span class="copy-en" lang="en">Reliable polling</span></h3>
+            <p><span class="copy-ja" lang="ja">Step Functions でクエリ完了を非同期待機。長時間クエリでも Lambda タイムアウトを回避。</span><span class="copy-en" lang="en">Wait asynchronously for query completion with Step Functions, avoiding Lambda timeouts for long-running queries.</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--benefits" id="benefits">
+      <div class="container">
+        <h2 class="section__title"><span class="copy-ja" lang="ja">導入のメリットと留意点</span><span class="copy-en" lang="en">Benefits and trade-offs</span></h2>
+        <p class="section__subtitle"><span class="copy-ja" lang="ja">期待できる効果と、導入前に把握しておきたい運用上の前提。</span><span class="copy-en" lang="en">Expected outcomes and operational considerations to understand before deployment.</span></p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3><span class="copy-ja" lang="ja">メリット</span><span class="copy-en" lang="en">Benefits</span></h3>
+            <p><span class="copy-ja" lang="ja">ユーザーごとの利用量と推定コストを把握でき、利用状況の説明や見直しに役立ちます。閾値超過の通知と月次レポートにより、異常や増加傾向に早く気づけます。</span><span class="copy-en" lang="en">See usage and estimated costs by user to support reviews and accountability. Threshold alerts and monthly reports help teams spot anomalies and rising trends sooner.</span></p>
+          </article>
+          <article class="feature-card">
+            <h3><span class="copy-ja" lang="ja">留意点・デメリット</span><span class="copy-en" lang="en">Trade-offs and limitations</span></h3>
+            <p><span class="copy-ja" lang="ja">CloudTrail、EventBridge、Lambda、DynamoDB などの AWS リソースが必要で、構築・保守と利用料金が発生します。推定コストは設定した GB 単価に基づくため、実際の請求額とは異なる場合があります。</span><span class="copy-en" lang="en">The stack requires AWS resources such as CloudTrail, EventBridge, Lambda, and DynamoDB, which add setup, maintenance, and AWS charges. Cost estimates use the configured price per GB and may differ from your actual bill.</span></p>
+          </article>
+          <article class="feature-card">
+            <h3><span class="copy-ja" lang="ja">期待される効果</span><span class="copy-en" lang="en">Expected impact</span></h3>
+            <p><span class="copy-ja" lang="ja">クエリ利用の可視性を高め、コスト増加の早期発見と、利用者・チームによるクエリ運用の見直しを支援します。コスト削減を自動で保証するものではありません。</span><span class="copy-en" lang="en">Improve visibility into query usage, surface cost increases earlier, and help users and teams review query practices. The tool does not automatically guarantee cost savings.</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--flow" id="flow">
+      <div class="container">
+        <h2 class="section__title"><span class="copy-ja" lang="ja">動きは、こうシンプル。</span><span class="copy-en" lang="en">How it works</span></h2>
+        <div class="flow">
+          <div class="flow__step">
+            <span class="flow__number">01</span>
+            <h3><span class="copy-ja" lang="ja">イベント検知</span><span class="copy-en" lang="en">Detect events</span></h3>
+            <p><span class="copy-ja" lang="ja">CloudTrail → EventBridge で StartQuery を検知。</span><span class="copy-en" lang="en">Detect StartQuery events through CloudTrail and EventBridge.</span></p>
+          </div>
+          <div class="flow__arrow" aria-hidden="true"></div>
+          <div class="flow__step">
+            <span class="flow__number">02</span>
+            <h3><span class="copy-ja" lang="ja">結果取得・記録</span><span class="copy-en" lang="en">Collect and record results</span></h3>
+            <p><span class="copy-ja" lang="ja">スキャン統計を取得し、DynamoDB に暗号化保存。</span><span class="copy-en" lang="en">Collect scan statistics and store them encrypted in DynamoDB.</span></p>
+          </div>
+          <div class="flow__arrow" aria-hidden="true"></div>
+          <div class="flow__step">
+            <span class="flow__number">03</span>
+            <h3><span class="copy-ja" lang="ja">通知・集計</span><span class="copy-en" lang="en">Notify and aggregate</span></h3>
+            <p><span class="copy-ja" lang="ja">閾値超過で即通知。月次でランキングと異常検知レポートを送信。</span><span class="copy-en" lang="en">Send an alert when usage exceeds the threshold, plus monthly ranking and anomaly reports.</span></p>
+          </div>
+        </div>
+
+        <div class="architecture">
+          <h3 class="architecture__title"><span class="copy-ja" lang="ja">構成図</span><span class="copy-en" lang="en">Architecture</span></h3>
+          <div class="architecture__diagram" aria-label="Architecture diagram">
+            <div class="arch-node">CloudTrail</div>
+            <div class="arch-line"></div>
+            <div class="arch-node arch-node--accent">EventBridge</div>
+            <div class="arch-line"></div>
+            <div class="arch-node">realtime_monitor</div>
+            <div class="arch-line arch-line--branch"></div>
+            <div class="arch-row">
+              <div class="arch-node arch-node--sub">DynamoDB</div>
+              <div class="arch-node arch-node--sub">Slack</div>
+              <div class="arch-node arch-node--sub">CloudWatch</div>
+            </div>
+            <div class="arch-line"></div>
+            <div class="arch-node arch-node--accent">EventBridge Scheduler</div>
+            <div class="arch-line"></div>
+            <div class="arch-node">monthly_ranking</div>
+            <div class="arch-line"></div>
+            <div class="arch-node arch-node--sub">Slack Report</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--start" id="start">
+      <div class="container">
+        <h2 class="section__title"><span class="copy-ja" lang="ja">5 分で始める。</span><span class="copy-en" lang="en">Get started in 5 minutes.</span></h2>
+        <p class="section__subtitle"><span class="copy-ja" lang="ja">Terraform のみ。追加サーバーは不要。</span><span class="copy-en" lang="en">Terraform only. No additional servers required.</span></p>
+        <div class="code-window">
+          <div class="code-window__header">
+            <span></span><span></span><span></span>
+          </div>
+          <pre><code>cd iac/realtime_monitor
+terraform init
+terraform apply -var="slack_webhook_url=$SLACK_URL" -var="price_per_gb=0.005"
+
+cd ../monthly_ranking
+terraform init
+terraform apply -var="slack_webhook_url=$SLACK_URL" \
+  -var="dynamodb_table_name=querycost-sentinel-realtime-monitor"</code></pre>
+        </div>
+        <div class="cta-row">
+          <a class="button button--primary" href="https://github.com/tomorrm/querycost-sentinel" target="_blank" rel="noopener noreferrer"><span class="copy-ja" lang="ja">ドキュメントを読む</span><span class="copy-en" lang="en">Read the docs</span></a>
+          <a class="button button--secondary" href="https://github.com/tomorrm/querycost-sentinel/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><span class="copy-ja" lang="ja">&copy; 2026 QueryCost Sentinel. MIT License のもとで公開。</span><span class="copy-en" lang="en">&copy; 2026 QueryCost Sentinel. Released under the MIT License.</span></p>
+      <p class="site-footer__links">
+        <a href="https://github.com/tomorrm/querycost-sentinel" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/tomorrm/querycost-sentinel/blob/main/README.md" target="_blank" rel="noopener noreferrer"><span class="copy-ja" lang="ja">ドキュメント</span><span class="copy-en" lang="en">Docs</span></a>
+        <a href="https://github.com/tomorrm/querycost-sentinel/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><span class="copy-ja" lang="ja">ライセンス</span><span class="copy-en" lang="en">License</span></a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

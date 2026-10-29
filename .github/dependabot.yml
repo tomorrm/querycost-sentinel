@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "pip"
+    directory: "/script/realtime_monitor"
+    schedule:
+      interval: "weekly"
+    groups:
+      pip-realtime:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "pip"
+    directory: "/script/monthly_ranking"
+    schedule:
+      interval: "weekly"
+    groups:
+      pip-monthly:
+        patterns:
+          - "*"

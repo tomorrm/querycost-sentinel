@@ -1,0 +1,38 @@
+region = "ap-northeast-1"
+
+# CloudWatch Logs Insights price per GB scanned in USD.
+# Update this to match your AWS region and account tier.
+price_per_gb = 0.005
+
+# Slack incoming webhook URL. Leave empty to disable notifications.
+# Ignored when slack_webhook_secret_arn is set.
+slack_webhook_url = "https://example.com/YOUR/WEBHOOK/URL"
+
+# Optional: retrieve the Slack webhook URL from AWS Secrets Manager instead.
+# slack_webhook_secret_arn = "arn:aws:secretsmanager:REGION:ACCOUNT:secret:NAME"
+
+# Optional: SNS topic ARN for CloudWatch alarms.
+# alarm_sns_topic_arn = "arn:aws:sns:REGION:ACCOUNT:TOPIC"
+
+# Optional overrides
+# memory_size                       = 256
+# timeout                           = 60
+# cloudwatch_logs_retention_in_days = 365
+# log_format                        = "text"
+# enable_xray_tracing               = true
+# create_dashboard                  = true
+# enable_step_functions             = true
+# create_alarm_sns_topic            = true
+# enable_anomaly_detection_alarm    = true
+# cost_anomaly_sigma                = 0
+# cost_anomaly_lookback_hours       = 168
+# alarm_lambda_errors_threshold     = 0
+# alarm_lambda_errors_evaluation_periods = 1
+# alarm_dynamodb_throttles_threshold = 0
+# alarm_dynamodb_throttles_evaluation_periods = 1
+# alarm_anomaly_band                = 2
+# price_per_gb                      = 0.005
+# warning_threshold_gb              = 10
+# recovery_period_in_days           = 35
+# query_wait_seconds                = 60
+# query_wait_interval_seconds       = 1

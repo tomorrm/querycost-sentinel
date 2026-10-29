@@ -1,0 +1,64 @@
+{
+    "eventVersion": "1.11",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "123456789012:example.user",
+        "arn": "arn:aws:sts::123456789012:assumed-role/example-role/example.user",
+        "accountId": "123456789012",
+        "accessKeyId": "EXAMPLEACCESSKEYID",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "EXAMPLEROLEID",
+                "arn": "arn:aws:iam::123456789012:role/example-role",
+                "accountId": "123456789012",
+                "userName": "example.user"
+            },
+            "attributes": {
+                "creationDate": "2025-06-19T23:19:50Z",
+                "mfaAuthenticated": "false"
+            }
+        }
+    },
+    "eventTime": "2025-06-19T23:51:04Z",
+    "eventSource": "logs.amazonaws.com",
+    "eventName": "StartQuery",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "AWS Internal",
+    "userAgent": "AWS Internal",
+    "requestParameters": {
+        "logGroupNames": [
+            "arn:aws:logs:us-east-1:123456789012:log-group:/ecs/",
+            "arn:aws:logs:us-east-1:123456789012:log-group:/ecs/nginx"
+        ],
+        "startTime": 1770788338,
+        "endTime": 1770788383,
+        "queryString": "fields @log, @timestamp, @message\n| filter @message like \"xxxxxxxxxxx\" or @message like \"yyyyyyyyyyyyyy\"\n| sort @timestamp, @message desc",
+        "dryRun": false
+    },
+    "responseElements": null,
+    "additionalEventData": {
+        "queryId": "a1b2c3d4-5678-90ab-cdef-ab0"
+    },
+    "requestID": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    "eventID": "a1b2c3d4-5678-90ab-cdef-EXAMPLEbbbbb",
+    "readOnly": true,
+    "resources": [
+        {
+            "accountId": "123456789012",
+            "type": "AWS::Logs::LogGroup",
+            "ARN": "arn:aws:logs:us-east-1:123456789012:log-group:/ecs/"
+        },
+        {
+            "accountId": "123456789012",
+            "type": "AWS::Logs::LogGroup",
+            "ARN": "arn:aws:logs:us-east-1:123456789012:log-group:/ecs/nginx"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "apiVersion": "20140328",
+    "managementEvent": true,
+    "recipientAccountId": "123456789012",
+    "eventCategory": "Management",
+    "sessionCredentialFromConsole": "true"
+}
